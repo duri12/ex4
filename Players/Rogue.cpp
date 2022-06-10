@@ -6,6 +6,6 @@ void Rogue::addCoins(int amount) {
     Player::addCoins(amount*2);
 }
 
-void Rogue::printInfo() const {
-    Player::printInfo("Rogue");
+void Rogue::printInfo(std::ostream& os) const {
+    Player::printInfo("Rogue" , os);
 }

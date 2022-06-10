@@ -47,11 +47,6 @@ Player& Player::operator=(const Player& p2) {
     return *this;                              
 }
 
-
-void Player::printInfo() const {
-    printPlayerDetails(std::cout,m_name,
-                       "Player",m_level,m_force,m_HP,m_coins);
-}
 void Player::levelUp() {
     if(this->m_level<MAX_LEVEL){
         this->m_level++;
@@ -117,7 +112,20 @@ bool Player::pay(int amount) {
     return false;
 }
 
-void Player::printInfo(const std::string &job) const {
-    printPlayerDetails(std::cout,m_name,
+void Player::printInfo(const std::string &job ,std::ostream& os) const {
+    printPlayerDetails(os,m_name,
                        job,m_level,m_force,m_HP,m_coins);
+}
+
+std::ostream &operator<<(std::ostream &os, const Player & p1) {
+    p1.printInfo(os);
+    return os;
+}
+
+int Player::getCoins() const {
+    return this->m_coins;
+}
+
+std::string Player::getName() const {
+    return this->m_name;
 }

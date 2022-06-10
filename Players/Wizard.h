@@ -12,6 +12,6 @@ public:
     Wizard & operator=(const Wizard& p2 ) = default;
     ~Wizard() override = default;
     void heal(int health) override;
-    void printInfo() const override;
+    void printInfo(std::ostream&) const override;
 };
 #endif //EX4_WIZARD_H
