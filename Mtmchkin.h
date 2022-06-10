@@ -1,8 +1,15 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 
-class Mtmchkin{
+#include <queue>
+#include "Players/Player.h"
+#include "Cards/Card.h"
 
+class Mtmchkin{
+    private:
+    std::queue<std::unique_ptr<Player>> players;
+    std::queue<std::unique_ptr<Card>> deck;
+    int rounds;
 public:
     
     /*
@@ -12,7 +19,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    Mtmchkin(const std::string fileName);
+    Mtmchkin(const std::string fileName); // Harel
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -20,7 +27,7 @@ public:
     * @return
     *      void
     */
-    void playRound();
+    void playRound(); // harel
     
     /*
     * Prints the leaderBoard of the game at a given stage of the game - according to the instruction in the exercise document.
@@ -28,7 +35,7 @@ public:
     * @return
     *      void
     */
-    void printLeaderBoard() const;
+    void printLeaderBoard() const; // eyal
     
     /*
     *  Checks if the game ended:
@@ -37,7 +44,7 @@ public:
     *          True if the game ended
     *          False otherwise
     */
-    bool isGameOver() const;
+    bool isGameOver() const; // harel
     
 	/*
     *  Returns the number of rounds played.
@@ -45,7 +52,7 @@ public:
     *  @return
     *          int - number of rounds played
     */
-    int getNumberOfRounds() const;
+    int getNumberOfRounds() const; //eyal
 };
 
 
