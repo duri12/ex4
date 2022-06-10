@@ -5,7 +5,7 @@
 
 static const int MAX_LEVEL = 10 ;
 static const int DEFAULT_FORCE = 5;
-static const int DEFAULT_COINS = 5;
+static const int DEFAULT_COINS = 10;
 
 
 Player::Player(const std::string &name, int maxHP, int force) {
