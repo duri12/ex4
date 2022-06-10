@@ -11,6 +11,7 @@ class Card {
 protected:
     Card(const std::string& name);
     friend std::ostream& operator<<(std::ostream&,const Card&);
+    std::string m_name;
 
 public:
     virtual void applyEncounter(Player& player) const =0;
@@ -18,8 +19,6 @@ public:
     virtual ~Card() = default;
     Card& operator=(const Card& other) = default;
 
-private:
-    std::string m_name;
 };
 
 
