@@ -17,3 +17,9 @@ void Goblin::applyEncounter(Player &player) const
         player.damage(damage);
     }
 }
+
+std::ostream &operator<<(std::ostream & os, const Goblin & p1 ) {
+    printMonsterDetails(os,p1.force ,p1.damage ,p1.coins );
+    printEndOfCardDetails(os);
+    return os;
+}

@@ -12,6 +12,8 @@ private:
     static const int force  = 10;
     static const int coins  = 2;
     static const int damage  = 10;
+    friend std::ostream& operator<<(std::ostream&,const Vampire&);
+
 public:
     Vampire();
     void applyEncounter(Player& player) const override;

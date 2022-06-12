@@ -16,3 +16,9 @@ void Dragon::applyEncounter(Player &player) const
         player.damage(damage);
     }
 }
+
+std::ostream &operator<<(std::ostream & os, const Dragon & p1) {
+    printMonsterDetails(os,p1.force ,p1.damage ,p1.coins , true );
+    printEndOfCardDetails(os);
+    return os;
+}

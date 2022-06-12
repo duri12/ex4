@@ -2,6 +2,7 @@
 #define MTMCHKIN_H_
 
 #include <queue>
+#include <stack>
 #include "Players/Player.h"
 #include "Cards/Card.h"
 
@@ -9,7 +10,9 @@ class Mtmchkin{
     private:
     std::queue<std::unique_ptr<Player>> players;
     std::queue<std::unique_ptr<Card>> deck;
-    int rounds;
+    std::queue<std::unique_ptr<Player>> winners;
+    std::stack<std::unique_ptr<Player>> losers;
+    int m_rounds;
 public:
     
     /*
