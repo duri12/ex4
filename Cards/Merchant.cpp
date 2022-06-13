@@ -12,7 +12,7 @@ void Merchant::applyEncounter(Player &player) const
     while(!loop) {
         do{
             try{
-                std::getline(std::cin, tempInput);
+                std::getline(std::cin, tempInput,'\n');
                 input =std::stoi(tempInput);
             }
             catch(std::exception e){

@@ -14,7 +14,7 @@ class DeckFileNotFound:public std::exception{
 class DeckFileFormatError:public std::logic_error{
     int m_line;
 public:
-    DeckFileFormatError(int line):
+    explicit DeckFileFormatError(int line):
     std::logic_error("Deck File Error: File format error in line"
     +std::to_string(line)){
         m_line = line;

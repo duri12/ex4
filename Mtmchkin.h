@@ -2,17 +2,33 @@
 #define MTMCHKIN_H_
 
 #include <queue>
-#include <stack>
+#include <vector>
+#include <string>
+#include "ctype.h"
+#include <fstream>
+#include <iostream>
+#include <memory>
 #include "Players/Player.h"
 #include "Cards/Card.h"
+#include "Exception.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Fairy.h"
+#include "Cards/Goblin.h"
+#include "Cards/Merchant.h"
+#include "Cards/Pitfall.h"
+#include "Cards/Treasure.h"
+#include "Cards/Vampire.h"
 
 class Mtmchkin{
     private:
-    std::queue<std::unique_ptr<Player>> players;
-    std::queue<std::unique_ptr<Card>> deck;
-    std::queue<std::unique_ptr<Player>> winners;
-    std::stack<std::unique_ptr<Player>> losers;
+    std::queue<std::unique_ptr<Card>> m_deck;
+    std::vector<std::unique_ptr<Player>> m_leaderBoard;
     int m_rounds;
+    int m_start;
+    int m_end;
+
+    static std::unique_ptr<Card> createCard(const std::string &type , int line );
 public:
     
     /*
@@ -22,7 +38,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    Mtmchkin(const std::string fileName); // Harel
+    explicit Mtmchkin(const std::string fileName); // Harel
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.

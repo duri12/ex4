@@ -35,6 +35,7 @@ public:
     virtual int getAttackStrength() const;
 
     int getCoins() const ;
+    int getHP() const ;
     std::string getName() const;
 };
 

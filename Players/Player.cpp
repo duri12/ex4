@@ -129,3 +129,7 @@ int Player::getCoins() const {
 std::string Player::getName() const {
     return this->m_name;
 }
+
+int Player::getHP() const {
+    return this->m_HP;
+}
