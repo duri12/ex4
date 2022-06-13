@@ -33,7 +33,7 @@ public:
     virtual void addCoins(int amount);
     bool pay(int amount);
     virtual int getAttackStrength() const;
-
+    bool wonGame();
     int getCoins() const ;
     int getHP() const ;
     std::string getName() const;

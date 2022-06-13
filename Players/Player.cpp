@@ -89,6 +89,9 @@ void Player::addCoins(int amount) {
         this->m_coins += amount;
     }
 }
+bool Player::wonGame() {
+    return (m_level==10);
+}
 
 int Player::getAttackStrength() const{
     return this->m_level+this->m_force;
