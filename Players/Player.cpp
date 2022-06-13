@@ -133,3 +133,6 @@ std::string Player::getName() const {
 int Player::getHP() const {
     return this->m_HP;
 }
+
+void Player::printInfo(std::ostream &) const {}
+

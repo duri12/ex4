@@ -208,7 +208,7 @@ void printRoundStartMessage(int roundCount);
  * @return
  *      void
  */
-void printWinBattle(const std::string &playerName, const std::string &monsterName);
+void printWinBattle(const std::string &PlayerName, const std::string &monsterName);
 
 /*
  * Prints info in case a player lost in an encounter (Battle card):
@@ -219,7 +219,7 @@ void printWinBattle(const std::string &playerName, const std::string &monsterNam
  * @return
  *      void
  */
-void printLossBattle(const std::string &playerName, const std::string &monsterName);
+void printLossBattle(const std::string &PlayerName, const std::string &monsterName);
 
 /*
  * Prints a message indicating the start of the LeaderBoard Ranking:
@@ -238,7 +238,7 @@ void printLeaderBoardStartMessage();
  * @return
  *      void
  */
-void printPlayerLeaderBoard(int ranking, const Player &player);
+void printPlayerLeaderBoard(int ranking, Player player);
 
 /*
  * Prints info indicating the end of the game:

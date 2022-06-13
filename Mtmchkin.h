@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <memory>
+#include "utilities.h"
 #include "Players/Player.h"
 #include "Cards/Card.h"
 #include "Exception.h"
@@ -64,7 +65,7 @@ public:
     *          True if the game ended
     *          False otherwise
     */
-    bool isGameOver() const; // harel
+    bool isGameOver() const; // eyal
     
 	/*
     *  Returns the number of rounds played.

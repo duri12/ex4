@@ -76,15 +76,16 @@ void Mtmchkin::initializeLeaderboard() {
     std::string tempInput;
     int size;
     do{
+        bool flag = true;
         try{
             std::getline(std::cin, tempInput,'\n');
             size =std::stoi(tempInput);
         }
         catch(std::exception e){
             printInvalidTeamSize();
-            continue;
+            flag = false;
         }
-        if(size < 2 || size >6){
+        if(size < 2 || size >6 && flag){
             printInvalidTeamSize();
         }
     }while(size < 2 || size >6);
@@ -94,14 +95,20 @@ void Mtmchkin::initializeLeaderboard() {
     for (int i = 0; i < size; ++i)
     {
         std::getline(std::cin, tempInput,' ');
-        for (int j = 0; j < sizeof(tempInput); ++j)
+        for (int j = 0; j < tempInput.size(); ++j)
         {
             if(!std::isalpha(tempInput[j])){
                 printInvalidName();
-
             }
         }
     }
-    
+}
 
+void Mtmchkin::printLeaderBoard() const {
+    printLeaderBoardStartMessage();
+    for (int i = 0; i < this->m_leaderBoard.size(); ++i)
+    {
+        Player temp = *(this->m_leaderBoard[i]);
+        printPlayerLeaderBoard(i,temp);
+    }
 }

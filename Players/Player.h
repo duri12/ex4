@@ -16,14 +16,14 @@ class Player {
 protected:
     void printInfo(const std::string &job , std::ostream&) const;
     Player(const std::string &name, int maxHP =100, int force =5);
-    Player(const Player& );
     friend std::ostream& operator<<(std::ostream&,const Player&);
 
 
 public:
+    Player(const Player& );
     Player & operator=(const Player& p2 );
     virtual ~Player() = default;
-    virtual void printInfo(std::ostream&) const = 0;
+    virtual void printInfo(std::ostream&) const ;
     void levelUp();
     int getLevel() const;
     void buff(int amount);

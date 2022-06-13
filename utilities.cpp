@@ -194,7 +194,7 @@ void printLeaderBoardStartMessage()
     cout << "Ranking    Player Name     Level     Force HP    Coins Job" << endl;
 }
 
-void printPlayerLeaderBoard(int ranking, const Player& player)
+void printPlayerLeaderBoard(int ranking, Player player)
 {
     cout << ranking << "          " << player << endl;
 }
