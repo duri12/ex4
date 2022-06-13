@@ -28,6 +28,7 @@ class Mtmchkin{
     int m_start;
     int m_end;
 
+    void initializeLeaderboard();
     static std::unique_ptr<Card> createCard(const std::string &type , int line );
 public:
     

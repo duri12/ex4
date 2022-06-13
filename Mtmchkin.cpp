@@ -69,3 +69,39 @@ bool Mtmchkin::isGameOver() const {
     }
     return true;
 }
+
+void Mtmchkin::initializeLeaderboard() {
+    printStartGameMessage();
+    printEnterTeamSizeMessage();
+    std::string tempInput;
+    int size;
+    do{
+        try{
+            std::getline(std::cin, tempInput,'\n');
+            size =std::stoi(tempInput);
+        }
+        catch(std::exception e){
+            printInvalidTeamSize();
+            continue;
+        }
+        if(size < 2 || size >6){
+            printInvalidTeamSize();
+        }
+    }while(size < 2 || size >6);
+    this->m_start =  size; 
+    this->m_end = 0; 
+    printInsertPlayerMessage();
+    for (int i = 0; i < size; ++i)
+    {
+        std::getline(std::cin, tempInput,' ');
+        for (int j = 0; j < sizeof(tempInput); ++j)
+        {
+            if(!std::isalpha(tempInput[j])){
+                printInvalidName();
+
+            }
+        }
+    }
+    
+
+}
