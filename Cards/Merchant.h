@@ -2,6 +2,7 @@
 #define EX4_MERCHANT_H
 
 #include "Card.h"
+#include <string>
 
 class Merchant:public Card{
 private:

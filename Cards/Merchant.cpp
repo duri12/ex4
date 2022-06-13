@@ -6,14 +6,20 @@ void Merchant::applyEncounter(Player &player) const
 {
     printMerchantInitialMessageForInteractiveEncounter(std::cout
                                                        ,player.getName(),player.getCoins());
+    std::string tempInput = "";
     int input;
-    std::cin >> input;
     bool loop = false;
     while(!loop) {
-        while (input != healthPotion && input != forceBoost && input != leave) {
-            printInvalidInput();
-            std::cin >> input;
+        do{
+            try{
+                std::getline(std::cin, tempInput);
+                input =std::stoi(tempInput);
+            }
+            catch(std::exception e){
+                printInvalidInput();
+            }
         }
+        while (input != healthPotion && input != forceBoost && input != leave);
         if (input == forceBoost) {
             if (player.pay(10)) {
                 player.buff(1);
