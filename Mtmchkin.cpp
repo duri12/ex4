@@ -143,26 +143,38 @@ void Mtmchkin::initializeLeaderboard() {
 }
 void Mtmchkin::playRound() {
     m_rounds++;
-    d
+    bool knockedOut = false;
     printRoundStartMessage(m_rounds);
     for(int i = m_start; i<=m_end; i++) {
+        if(isGameOver()) {
+            printGameEndMessage();
+            return;
+        }
+      //  while(m_leaderBoard[m_start]->isKnockedOut()) {
+          //  m_start++;
+       // }
+        m_deck.front()->applyEncounter(*m_leaderBoard[i]);
+        if(m_leaderBoard[i]->wonGame()) {
+            for(int k=i; k>m_start; k--) {
+                swap(m_leaderBoard[k], m_leaderBoard[k-1]);
+            }
+            m_start++;
+        }
+        if(m_leaderBoard[i]->isKnockedOut()) {
+            knockedOut = true;
+        }
+            for(int k=i; k<m_end; k++) {
+                swap(m_leaderBoard[k], m_leaderBoard[k+1]);
+            }
+            if(knockedOut) {
+                m_end--;
 
-    }
-    if(isGameOver()) {
-        printGameEndMessage();
-        return;
-    }
-    while(m_leaderBoard[m_start]->isKnockedOut()) {
-        m_start++;
-    }
-    m_deck.front()->applyEncounter(*m_leaderBoard[m_start]);
-    std::unique_ptr<Player> tempPlayerFront = std::move(m_leaderBoard[m_start]);
-    for(int i=m_start+1; i<m_end; i++) {
-        m_leaderBoard[i-1] = std::move(m_leaderBoard[i]);
-    }
-    m_leaderBoard[m_end] = std::move(tempPlayerFront);
-    std::unique_ptr<Card> tempCard = std::move(m_deck.front());
-    m_deck.pop();
-    m_deck.push(temp);
+            }
 
+       // std::unique_ptr<Player> tempPlayerFront = std::move(m_leaderBoard[m_start]);
+       // m_leaderBoard[m_end] = std::move(tempPlayerFront);
+        std::unique_ptr<Card> tempCard = std::move(m_deck.front());
+        m_deck.pop();
+        m_deck.push(tempCard);
+    }
 }

@@ -24,11 +24,11 @@
 class Mtmchkin{
     private:
     std::queue<std::unique_ptr<Card>> m_deck;
+    //std::queue<std::unique_ptr<Player>> m_players
     std::vector<std::unique_ptr<Player>> m_leaderBoard;
     int m_rounds;
     int m_start;
     int m_end;
-
     void initializeLeaderboard();
     static std::unique_ptr<Card> createCard(const std::string &type , int line );
     static std::unique_ptr<Player> createPlayer(const std::string &type, const std::string &name);
