@@ -131,11 +131,12 @@ void Mtmchkin::initializeLeaderboard() {
             std::unique_ptr<Player> player1 = createPlayer(tempInputType, tempInputName);
             if(player1) {
                 invalidClass = true;
+
+            } else {
+                m_leaderBoard.push_back(player1);
+                numOfPlayer++;
+
             }
-        }
-        if(invalidName == false && invalidClass == false) {
-            m_leaderBoard.push_back(player1);
-            numOfPlayer++;
         }
     }
     
