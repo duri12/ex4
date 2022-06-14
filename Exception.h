@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstring>
+
 
 class DeckFileNotFound:public std::exception{
     public:
@@ -11,13 +13,18 @@ class DeckFileNotFound:public std::exception{
     }
 };
 
-class DeckFileFormatError:public std::logic_error{
+class DeckFileFormatError:public std::exception{
     int m_line;
 public:
-    explicit DeckFileFormatError(int line):
-    std::logic_error("Deck File Error: File format error in line"
-    +std::to_string(line)){
+    explicit DeckFileFormatError(int line): std::exception()
+    {
         m_line = line;
+    }
+    const char * what() const noexcept override {
+        std::string temp  = "Deck File Error: File format error in line" +std::to_string(m_line);
+        char * tempChars = new char[temp.size()];
+        std::strcpy (tempChars, temp.c_str());
+        return  tempChars;
     }
 };
 

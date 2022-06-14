@@ -24,7 +24,6 @@
 class Mtmchkin{
     private:
     std::queue<std::unique_ptr<Card>> m_deck;
-    //std::queue<std::unique_ptr<Player>> m_players
     std::vector<std::unique_ptr<Player>> m_leaderBoard;
     int m_rounds;
     int m_start;

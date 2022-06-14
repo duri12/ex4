@@ -1,12 +1,12 @@
 #ifndef EX2_PLAYER_H
 #define EX2_PLAYER_H
 
-#include "../utilities.h"
+
 #include <iostream>
 
 
 class Player {
-    std::string m_name="";
+    std::string m_name;
     int m_level; //the level of the player
     int m_maxHP;//max HP of the player
     int m_HP; // the current HP of the player
