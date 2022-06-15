@@ -9,7 +9,6 @@ public:
     Rogue & operator=(const Rogue& p2 ) = default;
     ~Rogue() override = default;
     void addCoins(int amount) override;
-    std::ostream& printInfo(std::ostream&) const override;
 };
 
 

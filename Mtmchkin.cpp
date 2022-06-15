@@ -110,11 +110,12 @@ void Mtmchkin::initializeLeaderboard() {
 
     this->m_start =  0;
     this->m_end = size-1;
-    printInsertPlayerMessage();
+
 
     int numOfPlayer = 0;
     while(numOfPlayer<size)
     {
+        printInsertPlayerMessage();
         bool invalidName = false;
         bool invalidClass = false;
         std::getline(std::cin, tempInputName,' ');
@@ -155,10 +156,10 @@ void Mtmchkin::initializeLeaderboard() {
 void Mtmchkin::playRound() {
     this->m_rounds++;
     printRoundStartMessage(this->m_rounds);
-    for(int i = this->m_start; i<=this->m_end; i++) {
+    int end = m_end;
+    for(int i = this->m_start; i<=end; i++) {
         if(isGameOver())
         {
-            printGameEndMessage();
             return;
         }
         printTurnStartMessage(m_leaderBoard[m_start].get()->getName());
@@ -180,11 +181,14 @@ void Mtmchkin::playRound() {
         m_deck.pop();
         m_deck.push(std::move(tempCard));
     }
+    if(isGameOver()){
+        printGameEndMessage();
+    }
 }
 
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     for (int i = 0; i < this->m_leaderBoard.size(); i++){
-        printPlayerLeaderBoard(i,*m_leaderBoard[i]);
+        printPlayerLeaderBoard(i+1,*m_leaderBoard[i]);
     }
 }

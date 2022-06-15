@@ -8,9 +8,10 @@ static const int DEFAULT_FORCE = 5;
 static const int DEFAULT_COINS = 10;
 
 
-Player::Player(const std::string &name, int maxHP, int force) {
+Player::Player(const std::string &name, const std::string & job, int maxHP, int force) {
     m_name = name;
     m_HP = 0;
+    m_job = job;
     m_maxHP = 0;
     m_force=DEFAULT_FORCE;
     if(maxHP>0){
@@ -31,6 +32,7 @@ Player::Player(const Player& p1){
     m_force = p1.m_force;
     m_level = p1.m_level;
     m_coins =p1.m_coins;
+    m_job = p1.m_job;
 
 }
 
@@ -41,6 +43,7 @@ Player& Player::operator=(const Player& p2) {
     m_name = p2.m_name;
     m_level = p2.m_level;
     m_force = p2.m_force;
+    m_job = p2.m_job;
     m_maxHP = p2.m_maxHP;
     m_HP = p2.m_HP;
     m_coins = p2.m_coins;
@@ -115,15 +118,14 @@ bool Player::pay(int amount) {
     return false;
 }
 
-std::ostream &Player::printBase(const std::string &job ,std::ostream& os) const {
+std::ostream &Player::printBase(std::ostream& os) const {
     printPlayerDetails(os,m_name,
-                       job,m_level,m_force,m_HP,m_coins);
+                       m_job,m_level,m_force,m_HP,m_coins);
     return os;
 }
 
 std::ostream &operator<<(std::ostream &os, const Player & p1) {
-    p1.printInfo(os);
-    return os;
+    return p1.printBase(os);
 }
 
 int Player::getCoins() const {
@@ -136,8 +138,4 @@ std::string Player::getName() const {
 
 int Player::getHP() const {
     return this->m_HP;
-}
-
-std::ostream &Player::printInfo(std::ostream & os) const {
-    return os ;
 }

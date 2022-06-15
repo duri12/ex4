@@ -12,10 +12,11 @@ class Player {
     int m_HP; // the current HP of the player
     int m_coins;//the current coins of the player
     int m_force; // the force of the player
+    std::string m_job;
 
 protected:
-    std::ostream& printBase(const std::string &job , std::ostream&) const;
-    Player(const std::string &name, int maxHP =100, int force =5);
+    std::ostream& printBase(std::ostream&) const;
+    Player(const std::string &name , const std::string &, int maxHP =100, int force =5);
     friend std::ostream& operator<<(std::ostream&,const Player&);
 
 
@@ -23,7 +24,6 @@ public:
     Player(const Player& );
     Player & operator=(const Player& p2 );
     virtual ~Player() = default;
-    virtual std::ostream & printInfo(std::ostream&) const;
     void levelUp();
     int getLevel() const;
     void buff(int amount);

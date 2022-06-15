@@ -13,7 +13,6 @@ class Fighter:public Player{
     Fighter & operator=(const Fighter& p2 ) = default;
     ~Fighter() override = default;
     int getAttackStrength() const override;
-    std::ostream& printInfo(std::ostream&) const override;
 
 };
 #endif //EX4_FIGHTER_H
