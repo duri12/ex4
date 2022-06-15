@@ -136,7 +136,7 @@ void Mtmchkin::initializeLeaderboard() {
             if(player1) { // if nullptr
                 invalidClass = true;
             } else {
-                this->m_leaderBoard.push_back(player1);
+                this->m_leaderBoard.push_back(std::move(player1));
                 numOfPlayer++;
             }
         }
@@ -171,7 +171,7 @@ void Mtmchkin::playRound() {
 
         std::unique_ptr<Card> tempCard = std::move(m_deck.front());
         m_deck.pop();
-        m_deck.push(tempCard);
+        m_deck.push(std::move(tempCard));
     }
 }
 
