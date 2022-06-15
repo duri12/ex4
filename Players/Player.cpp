@@ -86,6 +86,11 @@ void Player::damage(int amount) {
     }
 }
 
+void Player::weaker(int num){
+    if(this->m_force -num >= 0){
+        this->m_force-=num;
+    }
+}
 
 void Player::addCoins(int amount) {
     if(amount >0){

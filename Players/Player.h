@@ -26,6 +26,7 @@ public:
     virtual ~Player() = default;
     void levelUp();
     int getLevel() const;
+    void weaker(int num);
     void buff(int amount);
     virtual void heal(int health);
     void damage(int damage);

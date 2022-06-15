@@ -14,6 +14,7 @@ void Vampire::applyEncounter(Player &player) const
     {
         printLossBattle(player.getName(),this->m_name);
         player.damage(damage);
+        player.weaker(1);
     }
 }
 

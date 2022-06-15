@@ -8,7 +8,7 @@ void Fairy::applyEncounter(Player &player) const
 {
     try
     {
-        Fairy& checker = dynamic_cast<Fairy&>(player);
+        Wizard& checker = dynamic_cast<Wizard&>(player);
         player.heal(heal);
         printFairyMessage(true);
     }
