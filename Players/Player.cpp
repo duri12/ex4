@@ -89,7 +89,7 @@ void Player::addCoins(int amount) {
         this->m_coins += amount;
     }
 }
-bool Player::wonGame() {
+bool Player::wonGame() const {
     return (m_level==10);
 }
 
@@ -115,9 +115,10 @@ bool Player::pay(int amount) {
     return false;
 }
 
-void Player::printInfo(const std::string &job ,std::ostream& os) const {
+std::ostream &Player::printBase(const std::string &job ,std::ostream& os) const {
     printPlayerDetails(os,m_name,
                        job,m_level,m_force,m_HP,m_coins);
+    return os;
 }
 
 std::ostream &operator<<(std::ostream &os, const Player & p1) {
@@ -137,5 +138,6 @@ int Player::getHP() const {
     return this->m_HP;
 }
 
-void Player::printInfo(std::ostream &) const {}
-
+std::ostream &Player::printInfo(std::ostream & os) const {
+    return os ;
+}

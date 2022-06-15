@@ -30,13 +30,13 @@ int Mtmchkin::getNumberOfRounds() const {
 }
 std::unique_ptr<Player> Mtmchkin::createPlayer(const std::string &type, const std::string &name) {
     if(type == "Rogue") {
-        return std::unique_ptr<Player>(new Rogue(name));
+        return std::move(std::unique_ptr<Player>(new Rogue(name)));
     }
     if(type == "Fighter") {
-        return std::unique_ptr<Player>(new Fighter(name));
+        return std::move(std::unique_ptr<Player>(new Fighter(name)));
     }
     if(type == "Wizard") {
-        return std::unique_ptr<Player>(new Wizard(name));
+        return std::move(std::unique_ptr<Player>(new Wizard(name)));
     }
     printInvalidClass();
     return {nullptr};
@@ -45,42 +45,41 @@ std::unique_ptr<Player> Mtmchkin::createPlayer(const std::string &type, const st
 std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line) {
     if(type == "Barfight")
     {
-        return std::unique_ptr<Card>(new Barfight());
+        return std::move(std::unique_ptr<Card>(new Barfight()));
     }
     else if (type == "Dragon")
     {
-        return std::unique_ptr<Card>(new Dragon());
+        return std::move(std::unique_ptr<Card>(new Dragon()));
     }
     else if (type == "Fairy")
     {
-        return std::unique_ptr<Card>(new Fairy());
+        return std::move(std::unique_ptr<Card>(new Fairy()));
     }
     else if (type == "Goblin")
     {
-        return std::unique_ptr<Card>(new Goblin());
+        return std::move(std::unique_ptr<Card>(new Goblin()));
     }
     else if (type == "Merchant")
     {
-        return std::unique_ptr<Card>(new Merchant());
+        return std::move(std::unique_ptr<Card>(new Merchant()));
     }
     else if (type == "Pitfall")
     {
-        return std::unique_ptr<Card>(new Pitfall());
+        return std::move(std::unique_ptr<Card>(new Pitfall()));
     }
     else if (type == "Treasure")
     {
-        return std::unique_ptr<Card>(new Treasure());
+        return std::move(std::unique_ptr<Card>(new Treasure()));
     }
     else if (type == "Vampire")
     {
-        return std::unique_ptr<Card>(new Vampire());
+        return std::move(std::unique_ptr<Card>(new Vampire()));
     }
     throw(DeckFileFormatError(line));
 }
 
 bool Mtmchkin::isGameOver() const {
     for(int i = 0; i < this->m_leaderBoard.size() && !this->m_leaderBoard.empty();i++) {
-        std::cout << this->m_leaderBoard.size();
         if(!this->m_leaderBoard[i]->wonGame()&& !this->m_leaderBoard[i]->isKnockedOut()){
             return false;
         }
@@ -133,10 +132,10 @@ void Mtmchkin::initializeLeaderboard() {
             }
         }
         if(!invalidName) {
-            std::getline(std::cin, tempInputType,' ');
+            std::getline(std::cin, tempInputType);
             try {
-                std::unique_ptr<Player> player1 = std::move(createPlayer(tempInputType, tempInputName));
-                if (player1) {
+                std::unique_ptr<Player> player1 = createPlayer(tempInputType, tempInputName);
+                if (player1== nullptr) {
                     invalidClass = true;
                     printInvalidClass();
                 } else {

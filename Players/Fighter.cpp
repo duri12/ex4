@@ -7,6 +7,8 @@ int Fighter::getAttackStrength() const {
 }
 
 
-void Fighter::printInfo(std::ostream& os) const {
-    Player::printInfo("Fighter",os);
+std::ostream & Fighter::printInfo(std::ostream& os) const {
+    this->printBase("Fighter" ,os);
+    return os;
 }
+

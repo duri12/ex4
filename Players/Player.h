@@ -14,7 +14,7 @@ class Player {
     int m_force; // the force of the player
 
 protected:
-    void printInfo(const std::string &job , std::ostream&) const;
+    std::ostream& printBase(const std::string &job , std::ostream&) const;
     Player(const std::string &name, int maxHP =100, int force =5);
     friend std::ostream& operator<<(std::ostream&,const Player&);
 
@@ -23,7 +23,7 @@ public:
     Player(const Player& );
     Player & operator=(const Player& p2 );
     virtual ~Player() = default;
-    virtual void printInfo(std::ostream&) const ;
+    virtual std::ostream & printInfo(std::ostream&) const;
     void levelUp();
     int getLevel() const;
     void buff(int amount);
@@ -33,7 +33,7 @@ public:
     virtual void addCoins(int amount);
     bool pay(int amount);
     virtual int getAttackStrength() const;
-    bool wonGame();
+    bool wonGame() const;
     int getCoins() const ;
     int getHP() const ;
     std::string getName() const;

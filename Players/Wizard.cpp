@@ -10,6 +10,7 @@ void Wizard::heal(int health) {
     Player::heal(health*2);
 }
 
-void Wizard::printInfo(std::ostream& os) const {
-    Player::printInfo("Wizard" , os);
+std::ostream & Wizard::printInfo(std::ostream& os) const {
+    this->printBase("Wizard" ,os);
+    return os;
 }
