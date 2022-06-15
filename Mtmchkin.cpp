@@ -1,4 +1,5 @@
 #include "Mtmchkin.h"
+#include <exception>
 
 Mtmchkin::Mtmchkin(const std::string fileName){
     this->m_start =  0 ;
@@ -78,7 +79,8 @@ std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line) {
 }
 
 bool Mtmchkin::isGameOver() const {
-    for(int i = 0; i < this->m_leaderBoard.size(); ++i) {
+    for(int i = 0; i < this->m_leaderBoard.size() && !this->m_leaderBoard.empty();i++) {
+        std::cout << this->m_leaderBoard.size();
         if(!this->m_leaderBoard[i]->wonGame()&& !this->m_leaderBoard[i]->isKnockedOut()){
             return false;
         }
@@ -132,12 +134,18 @@ void Mtmchkin::initializeLeaderboard() {
         }
         if(!invalidName) {
             std::getline(std::cin, tempInputType,' ');
-            std::unique_ptr<Player> player1 = createPlayer(tempInputType, tempInputName);
-            if(player1) { // if nullptr
-                invalidClass = true;
-            } else {
-                this->m_leaderBoard.push_back(std::move(player1));
-                numOfPlayer++;
+            try {
+                std::unique_ptr<Player> player1 = std::move(createPlayer(tempInputType, tempInputName));
+                if (player1) {
+                    invalidClass = true;
+                    printInvalidClass();
+                } else {
+                    this->m_leaderBoard.push_back(std::move(player1));
+                    numOfPlayer++;
+                }
+            }
+            catch(std::exception &e){
+                printInvalidClass();
             }
         }
     }
