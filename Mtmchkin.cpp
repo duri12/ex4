@@ -1,15 +1,18 @@
 #include "Mtmchkin.h"
 #include <exception>
 
-Mtmchkin::Mtmchkin(const std::string fileName){
+Mtmchkin::Mtmchkin(const std::string fileName)
+{
     this->m_start =  0 ;
     this->m_end = 0 ;
     std::string input;
     int line = 1 ;
     char inputBuffer[1024];
     std::ifstream file(fileName.c_str());
-    if (file) {
-        while(file.getline(inputBuffer,sizeof(inputBuffer))) {
+    if (file)
+    {
+        while(file.getline(inputBuffer,sizeof(inputBuffer)))
+        {
             input = inputBuffer;
             this->m_deck.push(createCard(input , line));
             line++;
@@ -25,24 +28,29 @@ Mtmchkin::Mtmchkin(const std::string fileName){
 }
 
 
-int Mtmchkin::getNumberOfRounds() const {
+int Mtmchkin::getNumberOfRounds() const
+{
     return this->m_rounds;
 }
-std::unique_ptr<Player> Mtmchkin::createPlayer(const std::string &type, const std::string &name) {
-    if(type == "Rogue") {
+std::unique_ptr<Player> Mtmchkin::createPlayer(const std::string &type, const std::string &name)
+{
+    if(type == "Rogue")
+    {
         return std::move(std::unique_ptr<Player>(new Rogue(name)));
     }
-    if(type == "Fighter") {
+    if(type == "Fighter")
+    {
         return std::move(std::unique_ptr<Player>(new Fighter(name)));
     }
-    if(type == "Wizard") {
+    if(type == "Wizard")
+    {
         return std::move(std::unique_ptr<Player>(new Wizard(name)));
     }
-    printInvalidClass();
     return {nullptr};
 }
 
-std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line) {
+std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line)
+{
     if(type == "Barfight")
     {
         return std::move(std::unique_ptr<Card>(new Barfight()));
@@ -78,32 +86,40 @@ std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line) {
     throw(DeckFileFormatError(line));
 }
 
-bool Mtmchkin::isGameOver() const {
-    for(int i = 0; i < this->m_leaderBoard.size() && !this->m_leaderBoard.empty();i++) {
-        if(!this->m_leaderBoard[i]->wonGame()&& !this->m_leaderBoard[i]->isKnockedOut()){
+bool Mtmchkin::isGameOver() const
+{
+    for(unsigned int i = 0; i < this->m_leaderBoard.size() && !this->m_leaderBoard.empty();i++)
+    {
+        if(!this->m_leaderBoard[i]->wonGame()&& !this->m_leaderBoard[i]->isKnockedOut())
+        {
             return false;
         }
     }
     return true;
 }
 
-void Mtmchkin::initializeLeaderboard() {
+void Mtmchkin::initializeLeaderboard()
+{
     printStartGameMessage();
     printEnterTeamSizeMessage();
     std::string tempInputName;
     std::string tempInputType;
 
     int size;
-    do{
-        try{
+    do
+    {
+        try
+        {
             std::getline(std::cin, tempInputName,'\n');
             size =std::stoi(tempInputName);
         }
-        catch(std::exception e){
+        catch(std::exception e)
+        {
             printInvalidTeamSize();
             continue;
         }
-        if(size < 2 || size >6){
+        if(size < 2 || size >6)
+        {
             printInvalidTeamSize();
         }
     }while(size < 2 || size >6);
@@ -111,40 +127,54 @@ void Mtmchkin::initializeLeaderboard() {
     this->m_start =  0;
     this->m_end = size-1;
 
-
+    int numOfTrys =0;
     int numOfPlayer = 0;
     while(numOfPlayer<size)
     {
-        printInsertPlayerMessage();
+            printInsertPlayerMessage();
+
+        numOfTrys++;
         bool invalidName = false;
         bool invalidClass = false;
+        if(invalidClass) // to deal with unused error
+        {
+        }
         std::getline(std::cin, tempInputName,' ');
-        if(tempInputName.size()>15) {
+        if(tempInputName.size()>15)
+        {
             invalidName = true;
             printInvalidName();
         }
-        if(!invalidName) {
-            for (int j = 0; j < tempInputName.size(); ++j)
+        if(!invalidName)
+        {
+            for (unsigned int j = 0; j < tempInputName.size(); ++j)
             {
-                if(!invalidName &&!std::isalpha(tempInputName[j])){
+                if(!invalidName &&!std::isalpha(tempInputName[j]))
+                {
                     printInvalidName();
                     invalidName = true;
                 }
             }
         }
-        if(!invalidName) {
+        if(!invalidName)
+        {
             std::getline(std::cin, tempInputType);
-            try {
+            try
+            {
                 std::unique_ptr<Player> player1 = createPlayer(tempInputType, tempInputName);
-                if (player1== nullptr) {
+                if (player1== nullptr)
+                {
                     invalidClass = true;
                     printInvalidClass();
-                } else {
+                }
+                else
+                {
                     this->m_leaderBoard.push_back(std::move(player1));
                     numOfPlayer++;
                 }
             }
-            catch(std::exception &e){
+            catch(std::exception &e)
+            {
                 printInvalidClass();
             }
         }
@@ -157,7 +187,8 @@ void Mtmchkin::playRound() {
     this->m_rounds++;
     printRoundStartMessage(this->m_rounds);
     int end = m_end;
-    for(int i = this->m_start; i<=end; i++) {
+    for(int i = this->m_start; i<=end; i++)
+    {
         if(isGameOver())
         {
             return;
@@ -165,14 +196,18 @@ void Mtmchkin::playRound() {
         printTurnStartMessage(m_leaderBoard[m_start].get()->getName());
         m_deck.front()->applyEncounter(*m_leaderBoard[m_start]);
 
-        if(m_leaderBoard[m_start]->wonGame()) {
+        if(m_leaderBoard[m_start]->wonGame())
+        {
             m_start++;
         }
-        else{
-            for(int k=m_start; k<m_end; k++) {
+        else
+        {
+            for(int k=m_start; k<m_end; k++)
+            {
                 m_leaderBoard[k].swap( m_leaderBoard[k+1]);
             }
-            if(m_leaderBoard[m_end]->isKnockedOut()) {
+            if(m_leaderBoard[m_end]->isKnockedOut())
+            {
                 m_end--;
             }
         }
@@ -181,14 +216,17 @@ void Mtmchkin::playRound() {
         m_deck.pop();
         m_deck.push(std::move(tempCard));
     }
-    if(isGameOver()){
+    if(isGameOver())
+    {
         printGameEndMessage();
     }
 }
 
-void Mtmchkin::printLeaderBoard() const {
+void Mtmchkin::printLeaderBoard() const
+{
     printLeaderBoardStartMessage();
-    for (int i = 0; i < this->m_leaderBoard.size(); i++){
+    for (unsigned int i = 0; i < this->m_leaderBoard.size(); i++)
+    {
         printPlayerLeaderBoard(i+1,*m_leaderBoard[i]);
     }
 }

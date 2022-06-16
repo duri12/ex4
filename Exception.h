@@ -6,21 +6,25 @@
 #include <cstring>
 
 
-class DeckFileNotFound:public std::exception{
+class DeckFileNotFound:public std::exception
+{
     public:
-    const char * what() const noexcept override {
+    const char * what() const noexcept override
+    {
         return "Deck File Error: File not found";
     }
 };
 
-class DeckFileFormatError:public std::exception{
+class DeckFileFormatError:public std::exception
+{
     int m_line;
 public:
     explicit DeckFileFormatError(int line): std::exception()
     {
         m_line = line;
     }
-    const char * what() const noexcept override {
+    const char * what() const noexcept override
+    {
         std::string temp  = "Deck File Error: File format error in line " +std::to_string(m_line)+"\0";
         char * tempChars = new char[temp.size()];
         std::strcpy (tempChars, temp.c_str());
@@ -28,9 +32,11 @@ public:
     }
 };
 
-class DeckFileInvalidSize:public std::exception{
+class DeckFileInvalidSize:public std::exception
+{
 public:
-    const char * what() const noexcept override {
+    const char * what() const noexcept override
+    {
         return "Deck File Error: Deck size is invalid";
     }
 };

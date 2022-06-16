@@ -10,6 +10,7 @@ void Barfight::applyEncounter(Player &player) const
     {
         Fighter& checker = dynamic_cast<Fighter&>(player);
         printBarfightMessage(true);
+        checker.doNothing(); // to avoid the not used error
     }
     catch(std::bad_cast& e)
     {

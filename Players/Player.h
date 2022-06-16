@@ -38,6 +38,7 @@ public:
     int getCoins() const ;
     int getHP() const ;
     std::string getName() const;
+    void doNothing() const;
 };
 
 
