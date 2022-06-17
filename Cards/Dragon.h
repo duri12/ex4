@@ -6,8 +6,8 @@
 class Dragon:public Card{
 private:
     static const int force  = 25;
-    static const int coins  = 10000;
-    static const int damage  = 100;
+    static const int coins  = 1000;
+    static const int damage  = 1000;
     //friend std::ostream& operator<<(std::ostream&,const Dragon&);
 
 public:

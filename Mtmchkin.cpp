@@ -3,6 +3,7 @@
 
 Mtmchkin::Mtmchkin(const std::string fileName)
 {
+    printStartGameMessage();
     this->m_start =  0 ;
     this->m_end = 0 ;
     std::string input;
@@ -104,7 +105,6 @@ bool Mtmchkin::isGameOver() const
 
 void Mtmchkin::initializeLeaderboard()
 {
-    printStartGameMessage();
     printEnterTeamSizeMessage();
     std::string tempInputName;
     std::string tempInputType;
