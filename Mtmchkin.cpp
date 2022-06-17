@@ -18,6 +18,10 @@ Mtmchkin::Mtmchkin(const std::string fileName)
             line++;
         }
         this->m_rounds =0 ;
+        if(this->m_deck.size() < 5)
+        {
+            throw(DeckFileInvalidSize());
+        }
         initializeLeaderboard();
     }
     else
@@ -126,13 +130,16 @@ void Mtmchkin::initializeLeaderboard()
 
     this->m_start =  0;
     this->m_end = size-1;
-
+    bool isValid = true ;
     int numOfTrys =0;
     int numOfPlayer = 0;
     while(numOfPlayer<size)
     {
+        if(isValid)
+        {
             printInsertPlayerMessage();
-
+        }
+        isValid = false;
         numOfTrys++;
         bool invalidName = false;
         bool invalidClass = false;
@@ -171,6 +178,7 @@ void Mtmchkin::initializeLeaderboard()
                 {
                     this->m_leaderBoard.push_back(std::move(player1));
                     numOfPlayer++;
+                    isValid = true;
                 }
             }
             catch(std::exception &e)
