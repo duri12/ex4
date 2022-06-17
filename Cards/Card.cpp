@@ -5,7 +5,11 @@ Card::Card(const std::string &name) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Card & p1) {
-    printCardDetails(os,p1.m_name);
-    printEndOfCardDetails(os);
+    p1.print(os);
     return os;
+}
+
+void Card::print(std::ostream &os ) const {
+    printCardDetails(os,this->m_name);
+    printEndOfCardDetails(os);
 }

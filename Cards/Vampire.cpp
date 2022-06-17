@@ -18,8 +18,8 @@ void Vampire::applyEncounter(Player &player) const
     }
 }
 
-std::ostream &operator<<(std::ostream &os, const Vampire &p1) {
-    printMonsterDetails(os,p1.force ,p1.damage ,p1.coins );
+void Vampire::print(std::ostream & os) const {
+    printCardDetails(os,"Vampire");
+    printMonsterDetails(os,Vampire::force ,Vampire::damage ,Vampire::coins );
     printEndOfCardDetails(os);
-    return os;
 }

@@ -17,8 +17,9 @@ void Dragon::applyEncounter(Player &player) const
     }
 }
 
-std::ostream &operator<<(std::ostream & os, const Dragon & p1) {
-    printMonsterDetails(os,p1.force ,p1.damage ,p1.coins , true );
+void Dragon::print(std::ostream & os) const {
+    printCardDetails(os,"Dragon");
+    printMonsterDetails(os,Dragon::force ,Dragon::damage ,Dragon::coins , true );
     printEndOfCardDetails(os);
-    return os;
 }
+

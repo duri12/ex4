@@ -18,8 +18,8 @@ void Goblin::applyEncounter(Player &player) const
     }
 }
 
-std::ostream &operator<<(std::ostream & os, const Goblin & p1 ) {
-    printMonsterDetails(os,p1.force ,p1.damage ,p1.coins );
+void Goblin::print(std::ostream & os) const {
+    printCardDetails(os,"Goblin");
+    printMonsterDetails(os,Goblin::force ,Goblin::damage ,Goblin::coins );
     printEndOfCardDetails(os);
-    return os;
 }

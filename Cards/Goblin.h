@@ -8,9 +8,10 @@ class Goblin:public Card{
     static const int force  = 6;
     static const int coins  = 2;
     static const int damage  = 10;
-    friend std::ostream& operator<<(std::ostream&,const Goblin&);
+    //friend std::ostream& operator<<(std::ostream&,const Goblin&);
 
 public:
+    void print(std::ostream& ) const override;
     Goblin();
     void applyEncounter(Player& player) const override;
     Goblin(const Goblin&) = default;

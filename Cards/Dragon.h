@@ -8,9 +8,10 @@ private:
     static const int force  = 25;
     static const int coins  = 10000;
     static const int damage  = 100;
-    friend std::ostream& operator<<(std::ostream&,const Dragon&);
+    //friend std::ostream& operator<<(std::ostream&,const Dragon&);
 
 public:
+    void print(std::ostream& ) const override;
     Dragon();
     void applyEncounter(Player& player) const override;
     Dragon(const Dragon&) = default;

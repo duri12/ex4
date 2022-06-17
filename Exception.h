@@ -18,17 +18,17 @@ class DeckFileNotFound:public std::exception
 class DeckFileFormatError:public std::exception
 {
     int m_line;
+    std::string message;
 public:
-    explicit DeckFileFormatError(int line): std::exception()
+    explicit DeckFileFormatError(int line): std::exception() ,message()
     {
         m_line = line;
+        message = "Deck File Error: File format error in line "
+                                              +std::to_string(m_line);
     }
     const char * what() const noexcept override
     {
-        std::string temp  = "Deck File Error: File format error in line " +std::to_string(m_line)+"\0";
-        char * tempChars = new char[temp.size()];
-        std::strcpy (tempChars, temp.c_str());
-        return  tempChars;
+        return message.c_str();
     }
 };
 
