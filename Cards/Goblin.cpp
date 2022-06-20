@@ -18,6 +18,16 @@ void Goblin::applyEncounter(Player &player) const
     }
 }
 
+bool Goblin::applyEncounterGang(Player &player, bool isDefeated) {
+    if(isDefeated ||player.getAttackStrength() < force){
+        printLossBattle(player.getName(),this->m_name);
+        player.damage(damage);
+        return true;
+    }
+    player.addCoins(coins);
+    return false;
+}
+
 void Goblin::print(std::ostream & os) const {
     printCardDetails(os,"Goblin");
     printMonsterDetails(os,Goblin::force ,Goblin::damage ,Goblin::coins );

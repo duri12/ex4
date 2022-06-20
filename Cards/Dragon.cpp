@@ -23,3 +23,13 @@ void Dragon::print(std::ostream & os) const {
     printEndOfCardDetails(os);
 }
 
+bool Dragon::applyEncounterGang(Player &player, bool isDefeated) {
+    if(isDefeated ||player.getAttackStrength() < force){
+        printLossBattle(player.getName(),this->m_name);
+        player.damage(damage);
+        return true;
+    }
+    player.addCoins(coins);
+    return false;
+}
+

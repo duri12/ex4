@@ -13,6 +13,7 @@ class Goblin:public Card{
 public:
     void print(std::ostream& ) const override;
     Goblin();
+    bool applyEncounterGang(Player &player, bool isDefeated) override;
     void applyEncounter(Player& player) const override;
     Goblin(const Goblin&) = default;
     Goblin& operator=(const Goblin& other) = default;

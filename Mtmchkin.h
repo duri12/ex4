@@ -20,6 +20,7 @@
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
 #include "Cards/Vampire.h"
+#include "Cards/Gang.h"
 
 class Mtmchkin{
     private:

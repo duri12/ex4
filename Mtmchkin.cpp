@@ -1,6 +1,7 @@
 #include "Mtmchkin.h"
 #include <exception>
 
+
 Mtmchkin::Mtmchkin(const std::string fileName)
 {
     printStartGameMessage();
@@ -15,8 +16,27 @@ Mtmchkin::Mtmchkin(const std::string fileName)
         while(file.getline(inputBuffer,sizeof(inputBuffer)))
         {
             input = inputBuffer;
-            this->m_deck.push(createCard(input , line));
-            line++;
+            if(input == "Gang"){
+                std::unique_ptr<Gang> myGang = std::unique_ptr<Gang>(new Gang);
+                line++;
+                bool isEnd = false;
+                while(file.getline(inputBuffer,sizeof(inputBuffer)) && !isEnd){
+                    input = inputBuffer;
+                    if(input == "EndGang"){
+                        isEnd = true;
+                    }
+                    else {
+                        (*myGang).pushMonster(createCard(input ,line));
+                    }
+                    line++;
+                }
+
+                this->m_deck.push(std::move(myGang));
+            }
+            else{
+                this->m_deck.push(createCard(input , line));
+                line++;
+            }
         }
         this->m_rounds =0 ;
         if(this->m_deck.size() < 5)

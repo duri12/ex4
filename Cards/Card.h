@@ -14,7 +14,9 @@ protected:
     std::string m_name;
 
 public:
+    std::string getName();
     virtual void print(std::ostream&) const;
+    virtual bool applyEncounterGang(Player& player , bool isDefeated);
     virtual void applyEncounter(Player& player) const =0;
     Card(const Card&) = default;
     virtual ~Card() = default;

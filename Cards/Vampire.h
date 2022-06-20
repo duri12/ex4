@@ -17,6 +17,7 @@ private:
 public:
     void print(std::ostream& ) const override;
     Vampire();
+    bool applyEncounterGang(Player &player, bool isDefeated) override;
     void applyEncounter(Player& player) const override;
     Vampire(const Vampire&) = default;
     Vampire& operator=(const Vampire& other) = default;
