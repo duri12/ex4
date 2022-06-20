@@ -9,7 +9,7 @@ Mtmchkin::Mtmchkin(const std::string fileName)
     this->m_end = 0 ;
     std::string input;
     int line = 1 ;
-    char inputBuffer[1024];
+    char inputBuffer[2048];
     std::ifstream file(fileName.c_str());
     if (file)
     {
