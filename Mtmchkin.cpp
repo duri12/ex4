@@ -18,19 +18,19 @@ Mtmchkin::Mtmchkin(const std::string fileName)
             input = inputBuffer;
             if(input == "Gang"){
                 std::unique_ptr<Gang> myGang = std::unique_ptr<Gang>(new Gang);
+                bool isGang = true;
                 line++;
-                bool isEnd = false;
-                while(file.getline(inputBuffer,sizeof(inputBuffer)) && !isEnd){
+                while(isGang){
+                    file.getline(inputBuffer,sizeof(inputBuffer));
                     input = inputBuffer;
                     if(input == "EndGang"){
-                        isEnd = true;
+                        isGang = false;
                     }
                     else {
-                        (*myGang).pushMonster(createCard(input ,line));
+                        myGang->pushMonster(createCard(input ,line));
                     }
                     line++;
                 }
-
                 this->m_deck.push(std::move(myGang));
             }
             else{
