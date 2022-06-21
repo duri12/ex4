@@ -71,7 +71,7 @@ std::unique_ptr<Player> Mtmchkin::createPlayer(const std::string &type, const st
     {
         return std::move(std::unique_ptr<Player>(new Wizard(name)));
     }
-    return {nullptr};
+    return std::unique_ptr<Player>{};
 }
 
 std::unique_ptr<Card> Mtmchkin::createCard(const std::string &type, int line)
@@ -123,21 +123,61 @@ bool Mtmchkin::isGameOver() const
     return true;
 }
 
+bool Mtmchkin::checkAlpta(std::string name)
+{
+    for(unsigned int i = 0; i <name.length();i++){
+        if(!std::isalpha(name[i])){
+            return false;
+        }
+    }
+    return true;
+}
+std::unique_ptr<Player> Mtmchkin::createPlayer2(){
+    std::string name;
+    std::string job;
+    bool isName = false;
+
+    while(!isName){
+        std::cin >> name;
+        std::cin >> job;
+        std::cin.ignore();
+
+        if(name.length() >15){
+            printInvalidName();
+            continue;
+        }
+        isName = checkAlpta(name);
+        if(!isName){
+            printInvalidName();
+            continue;
+        }
+        if(job == "Rogue" || job =="Wizard" || job == "Fighter"){
+            return std::move(createPlayer(job , name));
+        }
+        else{
+            printInvalidClass();
+            isName = false;
+            continue;
+        }
+    }
+    return std::unique_ptr<Player>();
+}
 void Mtmchkin::initializeLeaderboard()
 {
-    printEnterTeamSizeMessage();
+
     std::string tempInputName;
     std::string tempInputType;
 
     int size;
     do
     {
+        printEnterTeamSizeMessage();
         try
         {
             std::getline(std::cin, tempInputName,'\n');
             size =std::stoi(tempInputName);
         }
-        catch(std::exception e)
+        catch(std::exception &e)
         {
             printInvalidTeamSize();
             continue;
@@ -150,63 +190,11 @@ void Mtmchkin::initializeLeaderboard()
 
     this->m_start =  0;
     this->m_end = size-1;
-    bool isValid = true ;
-    int numOfTrys =0;
-    int numOfPlayer = 0;
-    while(numOfPlayer<size)
-    {
-        if(isValid)
-        {
-            printInsertPlayerMessage();
-        }
-        isValid = false;
-        numOfTrys++;
-        bool invalidName = false;
-        bool invalidClass = false;
-        if(invalidClass) // to deal with unused error
-        {
-        }
-        std::getline(std::cin, tempInputName,' ');
-        if(tempInputName.size()>15)
-        {
-            invalidName = true;
-            printInvalidName();
-        }
-        if(!invalidName)
-        {
-            for (unsigned int j = 0; j < tempInputName.size(); ++j)
-            {
-                if(!invalidName &&!std::isalpha(tempInputName[j]))
-                {
-                    printInvalidName();
-                    invalidName = true;
-                }
-            }
-        }
-        if(!invalidName)
-        {
-            std::getline(std::cin, tempInputType);
-            try
-            {
-                std::unique_ptr<Player> player1 = createPlayer(tempInputType, tempInputName);
-                if (player1== nullptr)
-                {
-                    invalidClass = true;
-                    printInvalidClass();
-                }
-                else
-                {
-                    this->m_leaderBoard.push_back(std::move(player1));
-                    numOfPlayer++;
-                    isValid = true;
-                }
-            }
-            catch(std::exception &e)
-            {
-                printInvalidClass();
-            }
-        }
+    for (int i = 0; i < size; ++i) {
+        printInsertPlayerMessage();
+        this->m_leaderBoard.push_back(std::move(createPlayer2()));
     }
+
 }
 
 

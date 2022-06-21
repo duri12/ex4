@@ -41,7 +41,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    explicit Mtmchkin(const std::string fileName); // Harel
+    explicit Mtmchkin(const std::string fileName);
     
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -49,7 +49,7 @@ public:
     * @return
     *      void
     */
-    void playRound(); // harel
+    void playRound();
     
     /*
     * Prints the leaderBoard of the game at a given stage of the game - according to the instruction in the exercise document.
@@ -57,7 +57,7 @@ public:
     * @return
     *      void
     */
-    void printLeaderBoard() const; // eyal
+    void printLeaderBoard() const;
     
     /*
     *  Checks if the game ended:
@@ -66,7 +66,7 @@ public:
     *          True if the game ended
     *          False otherwise
     */
-    bool isGameOver() const; // eyal
+    bool isGameOver() const;
     
 	/*
     *  Returns the number of rounds played.
@@ -74,7 +74,11 @@ public:
     *  @return
     *          int - number of rounds played
     */
-    int getNumberOfRounds() const; //eyal
+    int getNumberOfRounds() const;
+
+    std::unique_ptr<Player> createPlayer2();
+
+    bool checkAlpta(std::string name);
 };
 
 
