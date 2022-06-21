@@ -7,7 +7,7 @@ void Merchant::applyEncounter(Player &player) const
     printMerchantInitialMessageForInteractiveEncounter(std::cout
                                                        ,player.getName(),player.getCoins());
     std::string tempInput = "";
-    int input;
+    int input=0;
     do{
         try{
             std::getline(std::cin, tempInput,'\n');
