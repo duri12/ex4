@@ -39,6 +39,7 @@ Mtmchkin::Mtmchkin(const std::string fileName)
             }
         }
         this->m_rounds =0 ;
+
         if(this->m_deck.size() < 5)
         {
             throw(DeckFileInvalidSize());
@@ -168,7 +169,7 @@ void Mtmchkin::initializeLeaderboard()
     std::string tempInputName;
     std::string tempInputType;
 
-    int size;
+    int size = 1;
     do
     {
         printEnterTeamSizeMessage();
