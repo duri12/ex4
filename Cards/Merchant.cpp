@@ -6,14 +6,17 @@ void Merchant::applyEncounter(Player &player) const
 {
     printMerchantInitialMessageForInteractiveEncounter(std::cout
                                                        ,player.getName(),player.getCoins());
-    std::string tempInput = "";
-    int input=0;
+    std::string tempInput;
+    int input=-1;
     do{
+
         try{
             std::getline(std::cin, tempInput,'\n');
             input =std::stoi(tempInput);
         }
         catch(std::exception e){
+        }
+        if(input != healthPotion && input != forceBoost && input != leave){
             printInvalidInput();
         }
     }
@@ -24,6 +27,8 @@ void Merchant::applyEncounter(Player &player) const
             printMerchantSummary(std::cout, player.getName(), forceBoost, 10);
         } else {
             printMerchantInsufficientCoins(std::cout);
+            printMerchantSummary(std::cout, player.getName(), forceBoost, 0);
+
         }
     } else if (input == healthPotion) {
         if (player.pay(5)) {
@@ -31,6 +36,8 @@ void Merchant::applyEncounter(Player &player) const
             printMerchantSummary(std::cout, player.getName(), healthPotion, 5);
         } else {
             printMerchantInsufficientCoins(std::cout);
+            printMerchantSummary(std::cout, player.getName(), healthPotion, 0);
+
         }
     }
     else if (input == leave)
